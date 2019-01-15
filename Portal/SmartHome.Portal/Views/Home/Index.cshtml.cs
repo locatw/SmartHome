@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Portal.Views.Home
+namespace SmartHome.Portal.Views.Home
 {
     public class IndexModel : PageModel
     {

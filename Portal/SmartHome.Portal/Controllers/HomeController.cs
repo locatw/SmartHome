@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Portal.Controllers
+namespace SmartHome.Portal.Controllers
 {
     public class HomeController : Controller
     {
