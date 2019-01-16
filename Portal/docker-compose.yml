@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  smarthome.portal:
+    image: ${DOCKER_REGISTRY-}smarthomeportal
+    build:
+      context: .
+      dockerfile: SmartHome.Portal/Dockerfile

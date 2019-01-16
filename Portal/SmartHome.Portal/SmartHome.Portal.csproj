@@ -7,6 +7,7 @@
     <UserSecretsId>1d1703bd-03a1-4516-8718-97e97b64442d</UserSecretsId>
     <Authors>loca</Authors>
     <Company>loca</Company>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
