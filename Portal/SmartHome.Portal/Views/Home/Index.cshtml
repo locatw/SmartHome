@@ -1,5 +1,26 @@
-﻿@{ 
+﻿@model IEnumerable<Device>
+@{
     ViewData["Title"] = "ホーム";
 }
 
-<p>Hello world</p>
+<div>
+    <h1>デバイス</h1>
+
+    <table>
+        <thread>
+            <tr>
+                <th>ID</th>
+                <th>名前</th>
+            </tr>
+        </thread>
+        <tbody>
+            @foreach (var device in Model)
+            {
+                <tr>
+                    <td>@device.ID</td>
+                    <td>@device.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

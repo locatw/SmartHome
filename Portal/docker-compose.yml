@@ -6,3 +6,13 @@ services:
     build:
       context: .
       dockerfile: SmartHome.Portal/Dockerfile
+      args:
+        GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS
+        PROJECT_ID: $PROJECT_ID
+        IOT_CORE_REGION: $IOT_CORE_REGION
+        IOT_CORE_REGISTRY_ID: $IOT_CORE_REGISTRY_ID
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
+      - PROJECT_ID=$PROJECT_ID
+      - IOT_CORE_REGION
+      - IOT_CORE_REGISTRY_ID

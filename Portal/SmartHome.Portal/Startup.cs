@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace SmartHome.Portal
 {
@@ -11,6 +12,12 @@ namespace SmartHome.Portal
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var projectId = Environment.GetEnvironmentVariable("PROJECT_ID");
+            var region = Environment.GetEnvironmentVariable("IOT_CORE_REGION");
+            var registryId = Environment.GetEnvironmentVariable("IOT_CORE_REGISTRY_ID");
+
+            services.AddSingleton<Domain.Telemetry.IDeviceRepository, Infra.Telemetry.DeviceRepository>(_ =>
+                new Infra.Telemetry.DeviceRepository(projectId, region, registryId));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

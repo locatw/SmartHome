@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.CloudIot.v1" Version="1.37.0.1460" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartHome.Portal.Domain.Telemetry\SmartHome.Portal.Domain.Telemetry.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -17,4 +17,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SmartHome.Portal.Domain.Telemetry\SmartHome.Portal.Domain.Telemetry.csproj" />
+    <ProjectReference Include="..\SmartHome.Portal.Infra.Telemetry\SmartHome.Portal.Infra.Telemetry.csproj" />
+  </ItemGroup>
+
 </Project>
