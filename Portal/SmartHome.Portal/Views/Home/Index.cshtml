@@ -1,5 +1,22 @@
-﻿@model IEnumerable<Device>
+﻿@model SensorGraph
 @{
     ViewData["Title"] = "ホーム";
 }
 
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <script src="~/js/chart.js"></script>
+}
+
+<div class="chart-container" style="position: relative; height: 50vh; width: 50vw;">
+    <canvas id="chart"></canvas>
+</div>
+<script>
+    var title = @Html.Raw(Json.Serialize(Model.Title));
+    var unit = @Html.Raw(Json.Serialize(Model.Unit));
+    var maxValue = @Html.Raw(Json.Serialize(Model.MaxValue));
+    var labels = @Html.Raw(Json.Serialize(Model.Labels));
+    var data = @Html.Raw(Json.Serialize(Model.Data));
+    drawSensorGraph(title, unit, maxValue, labels, data);
+</script>
