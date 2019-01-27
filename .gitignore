@@ -329,6 +329,9 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
+# Visual Studio Code cache/options directory
+.vscode
+
 # App
 credential.json
 .env
