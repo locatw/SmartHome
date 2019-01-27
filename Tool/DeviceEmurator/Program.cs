@@ -23,6 +23,8 @@ namespace DeviceEmurator
 
         private Random random = new Random();
 
+        private readonly string deviceId;
+
         static Program()
         {
             CheckEnvironmentVariableExistence(ProjectIdEnvironmentKey);
@@ -30,11 +32,23 @@ namespace DeviceEmurator
             ProjectId = Environment.GetEnvironmentVariable(ProjectIdEnvironmentKey);
         }
 
+        public Program(string deviceId)
+        {
+            this.deviceId = deviceId;
+        }
+
         static async Task Main(string[] args)
         {
             CheckEnvironmentVariableExistence(GapEnvironmentKey);
 
-            await (new Program()).RunAsync();
+            if (args.Length != 1)
+            {
+                Console.WriteLine("device id is required in arguments.");
+                Console.WriteLine("Usage: dotnet run [device id]");
+                return;
+            }
+
+            await (new Program(args[0])).RunAsync();
         }
 
         private async Task RunAsync()
@@ -53,17 +67,18 @@ namespace DeviceEmurator
             var entities =
                 times
                     .Zip(temperatures, (time, temperature) => new { Time = time, Temperature = temperature })
-                    .Select(data => CreateEntity(data.Time, data.Temperature));
+                    .Select(data => CreateEntity(data.Time, deviceId, data.Temperature));
 
             await db.InsertAsync(entities);
         }
 
-        private Entity CreateEntity(DateTimeOffset time, double temperature)
+        private Entity CreateEntity(DateTimeOffset time, string deviceId, double temperature)
         {
             return new Entity()
             {
                 Key = keyFactory.CreateIncompleteKey(),
                 ["Time"] = time,
+                ["DeviceID"] = deviceId,
                 ["Temperature"] = temperature
             };
         }
