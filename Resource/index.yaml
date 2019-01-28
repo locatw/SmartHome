@@ -1,0 +1,6 @@
+indexes:
+
+- kind: Telemetry
+  properties:
+  - name: DeviceID
+  - name: Time
