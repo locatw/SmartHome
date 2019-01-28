@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SmartHome.Portal.Domain.Telemetry;
 using System;
 using System.Linq;
 
@@ -6,6 +7,15 @@ namespace SmartHome.Portal.Controllers
 {
     public class HomeController : Controller
     {
+        private static readonly TimeZoneInfo Jst = TimeZoneInfo.FindSystemTimeZoneById("Asia/Tokyo");
+
+        private ITelemetryRepository telemetryRepository;
+
+        public HomeController(ITelemetryRepository telemetryRepository)
+        {
+            this.telemetryRepository = telemetryRepository;
+        }
+
         public IActionResult Index()
         {
             var graph = MakeSampleGraph();
@@ -15,17 +25,12 @@ namespace SmartHome.Portal.Controllers
 
         private ViewModels.SensorGraph MakeSampleGraph()
         {
-            var jst = TimeZoneInfo.FindSystemTimeZoneById("Asia/Tokyo");
-            var now = DateTimeOffset.Now;
-
-            var random = new Random();
-            var count = 12;
+            var telemetrySet = telemetryRepository.GetMeasuredTodayAsync("TestDevice1", "Temperature", Jst).Result;
             var labels =
-                Enumerable
-                    .Range(0, count)
-                    .Select(i => new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, i * 5, 0, now.Offset))
-                    .Select(date => date.ToOffset(jst.BaseUtcOffset).ToString("HH:mm:ss"));
-            var data = Enumerable.Range(0, count).Select(_ => 15.0 + 5.0 * (random.NextDouble() - 0.5));
+                telemetrySet.Data
+                    .Select(telemetry => telemetry.Time)
+                    .Select(time => time.ToOffset(Jst.BaseUtcOffset).ToString("HH:mm:ss"));
+            var data = telemetrySet.Data.Select(telemetry => telemetry.DoubleValue);
 
             return new ViewModels.SensorGraph { Title = "室温", Unit = "℃", MaxValue = 40, Labels = labels, Data = data };
         }

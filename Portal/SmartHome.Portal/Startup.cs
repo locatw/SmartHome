@@ -18,6 +18,8 @@ namespace SmartHome.Portal
 
             services.AddSingleton<Domain.Telemetry.IDeviceRepository, Infra.Telemetry.DeviceRepository>(_ =>
                 new Infra.Telemetry.DeviceRepository(projectId, region, registryId));
+            services.AddSingleton<Domain.Telemetry.ITelemetryRepository, Infra.Telemetry.TelemetryRepository>(_ =>
+                new Infra.Telemetry.TelemetryRepository(projectId));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

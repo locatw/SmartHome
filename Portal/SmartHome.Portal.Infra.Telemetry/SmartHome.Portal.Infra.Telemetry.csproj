@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Apis.CloudIot.v1" Version="1.37.0.1460" />
+    <PackageReference Include="Google.Cloud.Datastore.V1" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
