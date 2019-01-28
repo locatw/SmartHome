@@ -77,7 +77,7 @@ namespace DeviceEmurator
             return new Entity()
             {
                 Key = keyFactory.CreateIncompleteKey(),
-                ["Time"] = time,
+                ["Time"] = time.UtcTicks,
                 ["DeviceID"] = deviceId,
                 ["Temperature"] = temperature
             };
